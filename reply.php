@@ -42,7 +42,7 @@ include 'nvgbar.php';
 //$reply=$_POST['reply'];
 $topicid=$_GET['id1'];
 include 'connect.php';
-if(isset($_SESSION['signed_in']) == true)
+if(isset($_SESSION['signed_in']) == 1)
 {
 	$content=$_POST['reply'];
   $id=$_SESSION['id'];
@@ -61,9 +61,9 @@ if(isset($_SESSION['signed_in']) == true)
              $test->bindParam(3,$topicid);
              $test->bindParam(4,$id);
              if($test->execute())
-              header("location:topic.php?posts_topic=$topicid");
+              redirect("location:topic.php?posts_topic=$topicid");
               else
-                echo 'An error occured while inserting your reply. Please try again later.' . mysql_error(); 
+                echo 'An error occured while inserting your reply. Please try again later.' . mysqli_error().' '.count_errors().; 
 
         }
         else
